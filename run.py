@@ -52,3 +52,54 @@ driver.get("https://krisha.kz/prodazha/kvartiry/almaty/")
 # website using Selenium WebDriver to prepare for data extraction. This website doesn't
 # have blockers and is accessible for scraping, making it a suitable choice for 
 # collecting real estate data.
+
+
+cards = driver.find_elements(By.CLASS_NAME,"a-card")
+
+all_data=[]
+
+for card in cards:
+    """
+    Extract data from all elements with class 'a-card' using Selenium.
+
+    The function collects information from each card element including:
+        - Header text
+        - Price text
+        - Location text
+        - Link URL
+        - Full combined text of the card
+
+    Parameters
+    ----------
+    driver : selenium.webdriver
+        Selenium WebDriver instance that has already loaded the page.
+
+    Returns
+    -------
+    list of lists
+        A list where each item contains:
+        [header, price, location, link, combined_text]
+
+    Notes
+    -----
+    Cards missing required elements are skipped.
+    """
+    try:
+
+        header=card.find_element(By.CLASS_NAME,"a-card__header").text
+        price=card.find_element(By.CLASS_NAME,"a-card__price").text
+        location=card.find_element(By.CLASS_NAME,"a-card__subtitle").text
+        link=card.find_element(By.TAG_NAME,"a").get_attribute("href")
+
+        combined_text=card.text
+
+        all_data.append([
+        header,
+        price,
+        location,
+        link,
+        combined_text
+        ])
+
+    except:
+        continue
