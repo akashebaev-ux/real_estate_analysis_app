@@ -45,7 +45,35 @@ except:
 
 driver = webdriver.Chrome()
 
-driver.get("https://krisha.kz/prodazha/kvartiry/almaty/")
+MAX_PAGES=10
+# max_pages is set to 10 to limit the number of pages scraped for testing purposes.
+
+all_data=[]
+
+page=1
+
+while page<=MAX_PAGES:
+    """
+    Iterate through Krisha.kz apartment listing pages and collect card data.
+
+    For each page:
+        - Open the page using Selenium
+        - Find all elements with class 'a-card'
+        - Extract header, price, location, link, and full card text
+        - Store extracted data in all_data list
+
+    The loop continues until MAX_PAGES is reached.
+
+    Notes
+    -----
+    Cards missing required elements are skipped.
+    """
+
+    url=f"https://krisha.kz/prodazha/kvartiry/almaty/?page={page}"
+
+    driver.get(url)
+
+    print("Page",page)
 
 # The website krisha.kz is a popular real estate listing site in Kazakhstan, 
 # where users can find apartments for sale in Almaty. The script opens this
@@ -54,52 +82,28 @@ driver.get("https://krisha.kz/prodazha/kvartiry/almaty/")
 # collecting real estate data.
 
 
-cards = driver.find_elements(By.CLASS_NAME,"a-card")
+    cards = driver.find_elements(By.CLASS_NAME,"a-card")
+ 
+    for card in cards:
+        
+        try:
 
-all_data=[]
+            header=card.find_element(By.CLASS_NAME,"a-card__header").text
+            price=card.find_element(By.CLASS_NAME,"a-card__price").text
+            location=card.find_element(By.CLASS_NAME,"a-card__subtitle").text
+            link=card.find_element(By.TAG_NAME,"a").get_attribute("href")
 
-for card in cards:
-    """
-    Extract data from all elements with class 'a-card' using Selenium.
+            combined_text=card.text
 
-    The function collects information from each card element including:
-        - Header text
-        - Price text
-        - Location text
-        - Link URL
-        - Full combined text of the card
+            all_data.append([
+            header,
+            price,
+            location,
+            link,
+            combined_text
+            ])
 
-    Parameters
-    ----------
-    driver : selenium.webdriver
-        Selenium WebDriver instance that has already loaded the page.
+        except:
+            continue
 
-    Returns
-    -------
-    list of lists
-        A list where each item contains:
-        [header, price, location, link, combined_text]
-
-    Notes
-    -----
-    Cards missing required elements are skipped.
-    """
-    try:
-
-        header=card.find_element(By.CLASS_NAME,"a-card__header").text
-        price=card.find_element(By.CLASS_NAME,"a-card__price").text
-        location=card.find_element(By.CLASS_NAME,"a-card__subtitle").text
-        link=card.find_element(By.TAG_NAME,"a").get_attribute("href")
-
-        combined_text=card.text
-
-        all_data.append([
-        header,
-        price,
-        location,
-        link,
-        combined_text
-        ])
-
-    except:
-        continue
+    page+=1
