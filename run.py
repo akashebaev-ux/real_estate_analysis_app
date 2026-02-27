@@ -199,3 +199,32 @@ df["price_clean"] = pd.to_numeric(
 df["price_clean"],
 errors="coerce"
 )
+
+
+"""
+Extract and convert apartment size in square meters.
+
+This code:
+1. Searches the 'combined_text' column for apartment sizes
+   like "45 m²" or "60м²".
+2. Extracts the numeric size value using a regular expression.
+3. Stores the result in a new column called 'sqm'.
+4. Converts the extracted values into numeric format.
+5. Invalid or missing values are converted to NaN.
+"""
+df["sqm"] = df["combined_text"].str.extract(
+r"(\d+\.?\d*)\s?[mм]²"
+)
+
+# \d+ - One or more digits (e.g., 45, 60)
+# \.? - optional decimal point (for sizes like 45.5)
+# \d* - optional decimals
+# \s? - optional whitespace
+# [mм]- Latin m or Russian м
+# ² - square meters symbol
+
+df["sqm"] = pd.to_numeric(
+df["sqm"],
+errors="coerce"
+)
+
