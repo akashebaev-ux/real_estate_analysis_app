@@ -19,6 +19,15 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
+# Selenium is a powerful tool for web scraping and browser automation. 
+# In this project, Selenium is used to navigate to the real estate listing website.
+
+import pandas as pd
+import numpy as np
+
+# Pandas helps me organize and analyze my scraped data easier. 
+# In my project, pandas turns raw Selenium data into a clean table.
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -107,3 +116,24 @@ while page<=MAX_PAGES:
             continue
 
     page+=1
+
+"""
+Creates a Pandas DataFrame from scraped real estate data.
+
+Each row represents one flat listing with:
+- header (title)
+- price
+- location
+- link
+- combined_text
+"""
+df = pd.DataFrame(
+all_data,
+columns=[
+"header",
+"price",
+"location",
+"link",
+"combined_text"
+]
+)
