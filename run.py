@@ -15,6 +15,15 @@ import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
+"""
+Selenium waiting tools.
+
+Used to wait for webpage elements to load before scraping.
+Improves scraper reliability.
+"""
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -109,11 +118,24 @@ while page<=MAX_PAGES:
     Cards missing required elements are skipped.
     """
 
-    url=f"https://krisha.kz/prodazha/kvartiry/almaty/?page={page}"
+    url=f"https://krisha.kz/prodazha/kvartiry/{city_slug}/?das[live.rooms]=2&page=1{page}"
 
     driver.get(url)
 
     print("Page",page)
+
+    try:
+
+    WebDriverWait(driver,10).until(
+        EC.presence_of_all_elements_located(
+            (By.CLASS_NAME,"a-card")
+        )
+    )
+
+    except:
+
+        print("No more pages.")
+        break
 
 # The website krisha.kz is a popular real estate listing site in Kazakhstan, 
 # where users can find apartments for sale in Almaty. The script opens this
