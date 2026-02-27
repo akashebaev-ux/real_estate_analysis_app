@@ -41,15 +41,15 @@ import numpy as np
 # USER INPUT
 # ==============================
 
-country_input = input("Enter the country: ").strip().lower()
+country_input = input("Enter the country (only Kazakhstan is available): ").strip().lower()
 
-city_input = input("Enter the city: ").strip().lower()
+city_input = input("Enter the city (only Almaty is available): ").strip().lower()
 
-rooms_input = input("Rooms desired: ").strip()
+rooms_input = input("Number of rooms desired (e.g., 2): ").strip()
 
-location_input = input("Preferred district: ").strip()
+location_input = input("Preferred district or location (optional): ").strip()
 
-price_input = input("Maximum budget: ").strip()
+price_input = input("Enter your maximum budget (0–500000000): ").strip()
 
 
 # ==============================
@@ -179,7 +179,9 @@ while page<=MAX_PAGES:
             combined_text
             ])
 
-        except:
+        except Exception as e:
+
+            print("Skipping a card due to missing data:",e)
             continue
     page+=1
 
@@ -555,11 +557,13 @@ print(f"Average price per m²: {avg_price_m2:,.0f} ₸")
 
 # PRINT TOP 5
 
-TOP_N=min(5,len(df))
+print("\n🔥 TOP INVESTMENT OPTIONS 🔥\n")
+
+TOP_N=min(3,len(df))
 
 for _,row in df.head(TOP_N).iterrows():
 
-    print("------------")
+    print("\n------------\n")
     print("Header:",row["header"])
     print("Location:",row["location"])
     print("Price:",f"{row['price_clean']:,.0f} ₸")
