@@ -315,3 +315,43 @@ df["undervaluation_score"]=-df["z_score"]
 max_m2=df["price_per_m2"].max()
 
 df["liquidity_score"]=(max_m2-df["price_per_m2"])/max_m2
+# Liquidity score is higher for cheaper properties, indicating they may sell faster.
+
+
+
+
+
+
+"""
+Write analyzed real estate data to today's worksheet.
+
+This code:
+1. Clears the current worksheet to remove old data.
+2. Adds a header row with column names.
+3. Uploads the processed DataFrame rows to Google Sheets.
+4. Stores key metrics such as sqm, price per m²,
+   z-score, liquidity score, center score,
+   and investment score.
+"""
+today_ws.clear()
+# Removes old data.
+
+today_ws.append_row([
+"header","price","location","link",
+"sqm","price_per_m2",
+"z_score","liquidity_score",
+"center_score","investment_score"
+])
+# Creates table headers.
+
+today_ws.append_rows(
+df[[
+"header","price","location","link",
+"sqm","price_per_m2",
+"z_score","liquidity_score",
+"center_score","investment_score"
+]].values.tolist()
+)
+
+# Sends your DataFrame to Google Sheets.
+# .values.tolist() converts the DataFrame into a format Google Sheets understands.
