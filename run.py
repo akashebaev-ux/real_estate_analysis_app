@@ -284,3 +284,34 @@ df = df[
 # Remove apartments with extremely low or extremely high price per m².
 # This helps to focus on realistic listings and improve analysis accuracy.
 
+
+
+
+
+"""
+Calculate investment scores based on price per square meter.
+
+This code:
+1. Calculates the mean and standard deviation of price_per_m2.
+2. Computes a z-score to measure how each listing compares
+   to the average price per square meter.
+3. Creates an undervaluation score where cheaper properties
+   receive higher scores.
+4. Creates a liquidity score based on relative price per m²,
+   where lower prices result in higher liquidity scores.
+"""
+mean = df["price_per_m2"].mean()
+# The mean (average) price per square meter across all listings.
+
+std = df["price_per_m2"].std()
+# Standard deviation = average distance from the mean
+
+df["z_score"]=(df["price_per_m2"]-mean)/std
+# Z-score is a number that shows how far a value is 
+# from the mean (average), measured in standard deviations.
+
+df["undervaluation_score"]=-df["z_score"]
+
+max_m2=df["price_per_m2"].max()
+
+df["liquidity_score"]=(max_m2-df["price_per_m2"])/max_m2
