@@ -37,6 +37,10 @@ import numpy as np
 # Pandas helps me organize and analyze my scraped data easier. 
 # In my project, pandas turns raw Selenium data into a clean table.
 
+from gspread_formatting import *
+# gspread-formatting is a library that allows you to apply formatting to Google Sheets using gspread.
+
+
 # ==============================
 # USER INPUT
 # ==============================
@@ -522,7 +526,60 @@ df[[
 # Sends your DataFrame to Google Sheets.
 # .values.tolist() converts the DataFrame into a format Google Sheets understands.
 
+# ==============================
+# GOOGLE SHEETS FORMATTING
+# ==============================
 
+"""
+Format Google Sheets output for better readability.
+
+This section:
+
+1. Formats the header row (A1:J1) in bold text.
+2. Freezes the header row so column titles remain visible
+   while scrolling.
+3. Highlights the top 3 investment listings in green
+   based on investment_score ranking.
+
+This improves the visual presentation of the results
+in Google Sheets.
+"""
+# Make header bold
+header_format = CellFormat(
+    textFormat=TextFormat(bold=True)
+)
+
+format_cell_range(
+    TODAY_WS,
+    "A1:J1",
+    header_format
+)
+
+
+# Freeze header row
+set_frozen(
+    TODAY_WS,
+    rows=1
+)
+
+
+# Highlight TOP 3 investment listings green
+
+green_format = CellFormat(
+    backgroundColor=Color(0.85,1,0.85)
+)
+
+TOP_N = min(3,len(df))
+
+for i in range(TOP_N):
+
+    row_number = i + 2
+
+    format_cell_range(
+        TODAY_WS,
+        f"A{row_number}:J{row_number}",
+        green_format
+    )
 
 
 
