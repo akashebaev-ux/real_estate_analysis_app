@@ -117,6 +117,7 @@ while page<=MAX_PAGES:
 
     page+=1
 
+
 """
 Creates a Pandas DataFrame from scraped real estate data.
 
@@ -140,8 +141,7 @@ columns=[
 
 """
 The code belowe: extract the number of rooms from the flat header and convert it to numeric format.
-"""
-
+""" 
 df["rooms"] = df["header"].str.extract(
     r"(\d+)\s*[- ]?\s*ком"
 )
@@ -164,6 +164,8 @@ if rooms_input:
     df = df[
         df["rooms"] == int(rooms_input)
     ]
+
+
 
 """
 Remove duplicate flat listings based on the link column.
@@ -228,3 +230,15 @@ df["sqm"],
 errors="coerce"
 )
 
+
+
+"""
+Calculate price per square meter.
+
+This code divides the cleaned apartment price by the
+apartment size in square meters and stores the result
+in the 'price_per_m2' column.
+"""
+df["price_per_m2"] = (
+df["price_clean"]/df["sqm"]
+)
