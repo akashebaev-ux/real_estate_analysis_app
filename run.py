@@ -137,3 +137,30 @@ columns=[
 "combined_text"
 ]
 )
+
+"""
+The code belowe: extract the number of rooms from the flat header and convert it to numeric format.
+"""
+
+df["rooms"] = df["header"].str.extract(
+    r"(\d+)\s*[- ]?\s*ком"
+)
+
+# () - Extract this part
+# \d+ - One or more digits (1, 2, 10, etc.)
+# \s* - Optional whitespace
+# [- ]? - Optional separator (space or dash)
+# ком - The word "ком" (short for "комната" meaning "room")
+
+df["rooms"] = pd.to_numeric(
+    df["rooms"],
+    errors="coerce"
+)
+
+# errors="coerce" converts non-numeric values to NaN, which is useful for filtering later.
+
+if rooms_input:
+
+    df = df[
+        df["rooms"] == int(rooms_input)
+    ]
