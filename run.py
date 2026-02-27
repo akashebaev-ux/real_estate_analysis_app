@@ -68,6 +68,15 @@ if city_input != "almaty":
     exit()
 
 
+city_slug = "almaty"
+
+
+# Budget conversion 
+try:
+    max_price = int(price_input)
+except:
+    max_price = 500000000
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -118,7 +127,12 @@ while page<=MAX_PAGES:
     Cards missing required elements are skipped.
     """
 
-    url=f"https://krisha.kz/prodazha/kvartiry/{city_slug}/?das[live.rooms]=2&page=1{page}"
+    if rooms_input:
+
+        url = f"https://krisha.kz/prodazha/kvartiry/{city_slug}/?das[live.rooms]={rooms_input}&page={page}"
+
+    else:
+        url = f"https://krisha.kz/prodazha/kvartiry/{city_slug}/?page={page}"
 
     driver.get(url)
 
@@ -168,7 +182,10 @@ while page<=MAX_PAGES:
         except:
             continue
 
-    page+=1
+page+=1
+
+driver.quit()
+#Close browser properly after scraping to free up system resources.
 
 
 """
@@ -228,6 +245,24 @@ df = df.drop_duplicates(subset=["link"])
 
 
 
+"""
+Filter listings by preferred location.
+
+If the user specifies a district or area, this code
+keeps only listings where the 'location' column
+contains the entered text.
+
+The comparison is case-insensitive and ignores
+missing values.
+"""
+if location_input:
+
+    df = df[
+        df["location"].str.lower().str.contains(
+        location_input.lower(),
+        na=False
+        )
+    ]
 
 """
 Clean and convert price data.
