@@ -173,3 +173,29 @@ df = df.drop_duplicates(subset=["link"])
 
 
 
+
+"""
+Clean and convert price data.
+
+This code:
+1. Removes all non-numeric characters from the 'price' column
+   (such as spaces, currency symbols, and text).
+2. Stores the cleaned values in a new column called 'price_clean'.
+3. Converts the cleaned prices into numeric format.
+4. Invalid or missing values are converted to NaN.
+"""
+df["price_clean"] = df["price"].str.replace(
+r"[^\d]",
+"",
+
+# [] - Matches any character in the set
+# ^ inside brackets = NOT
+# \d = any digit (0-9)
+# [^\d] - Matches any character that is NOT a digit (0-9)
+regex=True
+)
+
+df["price_clean"] = pd.to_numeric(
+df["price_clean"],
+errors="coerce"
+)
