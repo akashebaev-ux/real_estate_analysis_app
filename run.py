@@ -208,6 +208,12 @@ columns=[
 ]
 )
 
+# Check if DataFrame is empty after scraping. If no listings were found, print a message and exit.
+if df.empty:
+
+    print("No listings found.")
+    exit()
+
 """
 The code belowe: extract the number of rooms from the flat header and convert it to numeric format.
 """ 
@@ -331,6 +337,9 @@ This code divides the cleaned apartment price by the
 apartment size in square meters and stores the result
 in the 'price_per_m2' column.
 """
+df=df[df["sqm"]>0]
+# Filter out listings with zero or negative size to avoid division errors.
+
 df["price_per_m2"] = (
 df["price_clean"]/df["sqm"]
 )
@@ -398,15 +407,22 @@ mean = df["price_per_m2"].mean()
 std = df["price_per_m2"].std()
 # Standard deviation = average distance from the mean
 
-df["z_score"]=(df["price_per_m2"]-mean)/std
+if std and not np.isnan(std):
+    df["z_score"]=(df["price_per_m2"]-mean)/std
 # Z-score is a number that shows how far a value is 
 # from the mean (average), measured in standard deviations.
+else:
+    df["z_score"]=0
 
 df["undervaluation_score"]=-df["z_score"]
 
 max_m2=df["price_per_m2"].max()
 
-df["liquidity_score"]=(max_m2-df["price_per_m2"])/max_m2
+# safe liquidity score calculation that avoids division by zero
+if max_m2 and not np.isnan(max_m2):
+    df["liquidity_score"]=(max_m2-df["price_per_m2"])/max_m2
+else:
+    df["liquidity_score"]=0
 # Liquidity score is higher for cheaper properties, indicating they may sell faster.
 
 
