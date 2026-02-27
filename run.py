@@ -242,3 +242,12 @@ in the 'price_per_m2' column.
 df["price_per_m2"] = (
 df["price_clean"]/df["sqm"]
 )
+
+
+"""
+Filter unrealistic listings.
+
+Keep only apartments where the price per square meter
+is greater than 100000 to remove incorrect or invalid data.
+"""
+df = df[df["price_per_m2"] > 100000]
