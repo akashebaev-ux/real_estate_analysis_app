@@ -140,11 +140,11 @@ while page<=MAX_PAGES:
 
     try:
 
-    WebDriverWait(driver,10).until(
-        EC.presence_of_all_elements_located(
-            (By.CLASS_NAME,"a-card")
+        WebDriverWait(driver,10).until(
+            EC.presence_of_all_elements_located(
+                (By.CLASS_NAME,"a-card")
+            )
         )
-    )
 
     except:
 
@@ -181,8 +181,7 @@ while page<=MAX_PAGES:
 
         except:
             continue
-
-page+=1
+    page+=1
 
 driver.quit()
 #Close browser properly after scraping to free up system resources.
@@ -290,6 +289,11 @@ df["price_clean"],
 errors="coerce"
 )
 
+
+df = df[
+df["price_clean"] <= max_price
+]
+# Filter out listings that exceed the user's maximum budget to focus on relevant properties.
 
 """
 Extract and convert apartment size in square meters.
@@ -406,7 +410,55 @@ df["liquidity_score"]=(max_m2-df["price_per_m2"])/max_m2
 # Liquidity score is higher for cheaper properties, indicating they may sell faster.
 
 
+"""
+Calculate location-based and investment scores.
 
+This section:
+
+CENTER SCORE:
+1. Defines keywords representing central districts.
+2. Checks whether each listing location contains
+   one of the center keywords.
+3. Assigns a center_score:
+   - 1 = central location
+   - 0 = non-central location
+   """
+center_keywords = [
+"Самал",
+"Достык",
+"Абая",
+"Коктем",
+"Орбита",
+"Медеу"
+]
+
+df["center_score"] = df["location"].apply(
+lambda x: any(
+k.lower() in x.lower()
+for k in center_keywords
+)
+).astype(int)
+
+
+"""
+INVESTMENT SCORE:
+Combines multiple factors into a single score:
+   - undervaluation_score (cheaper properties score higher)
+   - liquidity_score (more affordable properties score higher)
+   - center_score (central locations score higher)
+
+Higher investment_score indicates a potentially
+better investment opportunity.
+"""
+df["investment_score"] = (
+
+df["undervaluation_score"]
++
+df["liquidity_score"]
++
+df["center_score"]
+
+)
 
 
 
@@ -421,10 +473,10 @@ This code:
    z-score, liquidity score, center score,
    and investment score.
 """
-today_ws.clear()
+TODAY_WS.clear()
 # Removes old data.
 
-today_ws.append_row([
+TODAY_WS.append_row([
 "header","price","location","link",
 "sqm","price_per_m2",
 "z_score","liquidity_score",
@@ -432,7 +484,7 @@ today_ws.append_row([
 ])
 # Creates table headers.
 
-today_ws.append_rows(
+TODAY_WS.append_rows(
 df[[
 "header","price","location","link",
 "sqm","price_per_m2",
@@ -443,3 +495,5 @@ df[[
 
 # Sends your DataFrame to Google Sheets.
 # .values.tolist() converts the DataFrame into a format Google Sheets understands.
+
+print("Saved to Google Sheets")
