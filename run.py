@@ -28,6 +28,21 @@ import numpy as np
 # Pandas helps me organize and analyze my scraped data easier. 
 # In my project, pandas turns raw Selenium data into a clean table.
 
+# ==============================
+# USER INPUT
+# ==============================
+
+country_input = input("Enter the country: ").strip().lower()
+
+city_input = input("Enter the city: ").strip().lower()
+
+rooms_input = input("Rooms desired: ").strip()
+
+location_input = input("Preferred district: ").strip()
+
+price_input = input("Maximum budget: ").strip()
+
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
