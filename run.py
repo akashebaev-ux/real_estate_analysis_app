@@ -43,6 +43,22 @@ location_input = input("Preferred district: ").strip()
 price_input = input("Maximum budget: ").strip()
 
 
+# ==============================
+# VALIDATION
+# ==============================
+"""
+Validate supported country and city.
+Program exits if unsupported values are entered.
+"""
+if country_input != "kazakhstan":
+    print("Currently only Kazakhstan supported.")
+    exit()
+
+if city_input != "almaty":
+    print("Currently only Almaty supported.")
+    exit()
+
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
