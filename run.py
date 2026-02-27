@@ -472,10 +472,18 @@ df["undervaluation_score"]
 +
 df["liquidity_score"]
 +
-df["center_score"]
+3*df["center_score"] # Center location is weighted more heavily in the investment score.
 
 )
 
+df=df.fillna(0)
+# Replace any remaining NaN values with 0 to ensure all listings have valid scores.
+# Replace missing values and show the best investments first.
+
+df=df.sort_values(
+by="investment_score",
+ascending=False
+)
 
 
 """
@@ -511,5 +519,53 @@ df[[
 
 # Sends your DataFrame to Google Sheets.
 # .values.tolist() converts the DataFrame into a format Google Sheets understands.
+
+
+
+
+
+"""
+Display market statistics and top investment listings.
+
+This section:
+
+MARKET SUMMARY:
+1. Calculates average price, average apartment size,
+   and average price per square meter.
+2. Prints a summary of the real estate market.
+
+TOP LISTINGS:
+3. Selects the top investment opportunities.
+4. Prints detailed information for up to 5 listings,
+   including header, location, price, size,
+   price per square meter, and link.
+"""
+# PRINT SUMMARY
+
+avg_price = df["price_clean"].mean()
+avg_sqm = df["sqm"].mean()
+avg_price_m2 = df["price_per_m2"].mean()
+
+print("\n📊 MARKET SUMMARY\n")
+
+print(f"Average price: {avg_price:,.0f} ₸")
+print(f"Average size: {avg_sqm:.1f} m²")
+print(f"Average price per m²: {avg_price_m2:,.0f} ₸")
+
+
+# PRINT TOP 5
+
+TOP_N=min(5,len(df))
+
+for _,row in df.head(TOP_N).iterrows():
+
+    print("------------")
+    print("Header:",row["header"])
+    print("Location:",row["location"])
+    print("Price:",f"{row['price_clean']:,.0f} ₸")
+    print("Size:",f"{row['sqm']:.1f} m²")
+    print("Price per m²:",f"{row['price_per_m2']:,.0f} ₸")
+    print("Link:",row["link"])
+
 
 print("Saved to Google Sheets")
