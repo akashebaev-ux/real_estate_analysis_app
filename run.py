@@ -251,3 +251,36 @@ Keep only apartments where the price per square meter
 is greater than 100000 to remove incorrect or invalid data.
 """
 df = df[df["price_per_m2"] > 100000]
+
+
+
+"""
+Remove price per square meter outliers using the IQR method.
+
+This code:
+1. Calculates the first quartile (Q1) and third quartile (Q3)
+   of the price_per_m2 column.
+2. Computes the interquartile range (IQR).
+3. Filters out values outside the range:
+   Q1 - 1.5 * IQR to Q3 + 1.5 * IQR.
+4. Keeps only listings within the normal price range.
+"""
+Q1 = df["price_per_m2"].quantile(0.25)
+
+# Finds the 25% percentile
+# Lower price range
+
+Q3 = df["price_per_m2"].quantile(0.75)
+
+# Finds the 75% percentile
+# Upper price range
+
+IQR = Q3-Q1
+
+df = df[
+(df["price_per_m2"]>=Q1-1.5*IQR) &
+(df["price_per_m2"]<=Q3+1.5*IQR)
+]
+# Remove apartments with extremely low or extremely high price per m².
+# This helps to focus on realistic listings and improve analysis accuracy.
+
