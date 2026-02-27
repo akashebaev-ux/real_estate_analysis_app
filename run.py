@@ -164,3 +164,12 @@ if rooms_input:
     df = df[
         df["rooms"] == int(rooms_input)
     ]
+
+"""
+Remove duplicate flat listings based on the link column.
+Ensures each property appears only once in the dataset.
+"""
+df = df.drop_duplicates(subset=["link"])
+
+
+
