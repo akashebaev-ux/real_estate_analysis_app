@@ -184,7 +184,8 @@ The program will:
   
    **Note:** Please wait while the system calculates the parameters.
 
-   <img width="600" alt="Untitled design" src="https://github.com/user-attachments/assets/a3c2b6a9-9932-4d67-9fa0-49fd3e00e859">
+ <img width="600" alt="Run_app" src="https://github.com/user-attachments/assets/3f4ddf3d-c9e1-4170-ae5f-265d950bb6a8">
+
 
 
 
@@ -418,7 +419,7 @@ Features:
 |--------|------------|-------|---------|----------|
 | As a developer | I want to set up the project structure so that the application can run locally | - Create main Python script<br>- Add required imports<br>- Install dependencies<br>- Verify script runs | Script runs without errors | <img width="100" height="50" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569">|
 | As a user | I want the application to save results to Google Sheets so that I can access them later | - Set up Google Sheets API<br>- Add credentials<br>- Connect using gspread<br>- Test spreadsheet access | Application connects successfully to the spreadsheet |<img width="100" height="50" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569">|
-| As a user | I want a worksheet created for each run so that my data is organized by date | - Generate today’s date<br>- Open worksheet<br>- Create worksheet if missing | Worksheet appears automatically |<img width="100" height="500" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569">|
+| As a user | I want a worksheet created for each run so that my data is organized by date | - Generate today’s date<br>- Open worksheet<br>- Create worksheet if missing | Worksheet appears automatically |<img width="100" height="50" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569">|
 | As a user | I want to enter search criteria so that I can analyze relevant apartments | - Country input<br>- City input<br>- Rooms input<br>- Location input<br>- Budget input | Inputs are accepted correctly |<img width="100" height="50" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569">|
 | As a user | I want invalid inputs rejected so that the program runs correctly | - Validate country<br>- Validate city<br>- Validate budget | Invalid values stop execution | <img width="100" height="50" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569"> |
 | As a user | I want the program to load apartment listings so that I can analyze the market | - Set up Playwright<br>- Open krisha.kz<br>- Wait for listings | Listings page loads successfully | <img width="100" height="50" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569"> |
