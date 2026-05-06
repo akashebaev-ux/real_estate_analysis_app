@@ -184,7 +184,8 @@ The program will:
   
    **Note:** Please wait while the system calculates the parameters.
 
-   <img width="600" alt="Untitled design" src="https://github.com/user-attachments/assets/a3c2b6a9-9932-4d67-9fa0-49fd3e00e859">
+ <img width="600" alt="Run_app" src="https://github.com/user-attachments/assets/3f4ddf3d-c9e1-4170-ae5f-265d950bb6a8">
+
 
 
 
@@ -264,6 +265,23 @@ Ensures:
 - Country supported
 - City supported
 - Budget numeric
+
+**If users enter incorrect data into all input fields, the default data will be applied after the third failed attempt.**
+
+
+
+<img width="600" src="https://github.com/user-attachments/assets/2ebde7c9-f043-48d8-bd1f-1737be20ad46">
+
+
+<img width="600" src="https://github.com/user-attachments/assets/bb6081c1-4d25-4887-8764-1a1a715a656a">
+
+
+<img width="600" src="https://github.com/user-attachments/assets/08f1af38-5ab4-4342-8ef8-17464e1afeb7">
+
+
+<img width="600" src="https://github.com/user-attachments/assets/185e24f2-a6f4-4e7e-b62d-07505a8091b7">
+
+
 
 **Web Scraper**
 
@@ -418,7 +436,7 @@ Features:
 |--------|------------|-------|---------|----------|
 | As a developer | I want to set up the project structure so that the application can run locally | - Create main Python script<br>- Add required imports<br>- Install dependencies<br>- Verify script runs | Script runs without errors | <img width="100" height="50" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569">|
 | As a user | I want the application to save results to Google Sheets so that I can access them later | - Set up Google Sheets API<br>- Add credentials<br>- Connect using gspread<br>- Test spreadsheet access | Application connects successfully to the spreadsheet |<img width="100" height="50" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569">|
-| As a user | I want a worksheet created for each run so that my data is organized by date | - Generate today’s date<br>- Open worksheet<br>- Create worksheet if missing | Worksheet appears automatically |<img width="100" height="500" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569">|
+| As a user | I want a worksheet created for each run so that my data is organized by date | - Generate today’s date<br>- Open worksheet<br>- Create worksheet if missing | Worksheet appears automatically |<img width="100" height="50" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569">|
 | As a user | I want to enter search criteria so that I can analyze relevant apartments | - Country input<br>- City input<br>- Rooms input<br>- Location input<br>- Budget input | Inputs are accepted correctly |<img width="100" height="50" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569">|
 | As a user | I want invalid inputs rejected so that the program runs correctly | - Validate country<br>- Validate city<br>- Validate budget | Invalid values stop execution | <img width="100" height="50" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569"> |
 | As a user | I want the program to load apartment listings so that I can analyze the market | - Set up Playwright<br>- Open krisha.kz<br>- Wait for listings | Listings page loads successfully | <img width="100" height="50" src="https://github.com/user-attachments/assets/e03d9d01-51a9-40d7-8970-3551bfcdf569"> |
@@ -1085,6 +1103,7 @@ This command installs the **Chromium browser** required for Playwright to run th
 
 ⚠️**Important note:** Installing Chromium during runtime may introduce a delay when the application starts. As a result, it can sometimes take **1–3 minutes** for the main ASCII-art text to appear while the browser installation and initialization process completes.
 
+**NOTE: It was discovered that this code overwhelms the Heroku app’s memory capacity, but there is no alternative way to resolve this issue.**
 ---
 
 # Deployment
