@@ -19,6 +19,9 @@ Developer: [Azamat Kashebayev](https://github.com/akashebaev-ux)
 ╚═╝  ╚═╝╚═╝     ╚═╝    
 ```
 
+The link to the [Real Estate Investment Analysis App](https://real-estate-app-2026-9178939f4b7b.herokuapp.com/)
+The link to the [Google spreadsheet](https://docs.google.com/spreadsheets/d/1LsCn1ZCsya1gHUvBHxhPOWLg6muRCamR4Mk9WYVjDYM) 
+
 # Overview
 
 # Real Estate Investment Analysis App
@@ -56,7 +59,6 @@ The application includes references and links to the original data sources. If r
     - [Strategy](#1-strategy)
     - [Scope](#2-scope)
     - [Structure](#3-structure)
-      - [User Flow](#user-flow)
       - [Flowchart](#flowchart)
     - [Skeleton](#4-skeleton)
     - [Surface](#5-surface)
@@ -105,12 +107,13 @@ The application includes references and links to the original data sources. If r
 
 ---
 
-## Features
+## Features 
+*(overview) 
 
 - Scrapes apartment listings from **Krisha.kz**
 - Filters listings by **number of rooms**
-- Optional filtering by **location or district**
-- Filters properties by **maximum budget**
+- Optional filtering by **location**
+- Filters properties by **budget**
 - Calculates **price per square meter**
 - Removes unrealistic listings using **statistical filtering**
 - Detects **undervalued properties**
@@ -120,7 +123,8 @@ The application includes references and links to the original data sources. If r
 
 ---
 
-## Project Workflow
+## Project Workflow 
+*(overview)
 
 1. User enters search criteria:
    - Country
@@ -163,28 +167,19 @@ Please be patient. The program may take **1–3 minutes** to process all calcula
 You will be asked to enter:
 
 - Country
-
 - City
-
 - Number of rooms (1-10)
-  
 - Preferred location (center or outskirts)
-
 - Budget
 
 
 The program will:
 
 1. Connect to Google Sheets
-
 2. Scrape apartment listings
-
 3. Analyze market data
-
 4. Rank investment opportunities
-
 5. Translate the three best investment opportunities into English.
-
 6. Export results
   
    **Note:** Please wait while the system calculates the parameters.
@@ -199,17 +194,11 @@ The program will:
 A command-line real estate analysis tool that:
 
 - Collects apartment search parameters
-
 - Scrapes listings automatically
-
 - Cleans and filters data
-
 - Calculates investment metrics
-
 - Identifies undervalued apartments
-
 - Translates the three best investment opportunities into English.
-
 - Saves results to Google Sheets
 
 
@@ -224,19 +213,14 @@ Provide automated real estate market analysis.
 **Primary User Needs**
 
 - Find affordable apartments
-
 - Compare prices
-
 - Identify investments
-
 - Analyze market trends
 
 **Business Goals**
 
 - Provide reliable analysis
-
 - Automate real estate research
-
 - Save time searching listings
 
 ## 2. Scope
@@ -244,13 +228,9 @@ Provide automated real estate market analysis.
 **Features**
 
 - Real estate web scraping
-
 - Data cleaning
-
 - Price analysis
-
 - Investment scoring
-
 - Google Sheets export
 
 **Content Requirements**
@@ -282,9 +262,7 @@ Input Content:
 Ensures:
 
 - Country supported
-
 - City supported
-
 - Budget numeric
 
 **Web Scraper**
@@ -400,7 +378,7 @@ Exports results
 
 ## Flowchart
 
-<img width="600" src="https://github.com/user-attachments/assets/b86b9db2-bacd-4be1-9c28-5d736df7c617">
+<img width="600" src="https://github.com/user-attachments/assets/0e97fdaf-da2c-44ad-97bc-6afc4c6792f5">
 
 
 
@@ -421,7 +399,6 @@ Enter your budget (20000000 - 500000000):
 ```
 ---
 
-
 ## 5. Surface
 **Visual Design**
 
@@ -430,13 +407,9 @@ Minimal terminal-based interface.
 Features:
 
 - Clean text layout
-
 - Clear prompts
-
 - Structured output
-
 - Market summary section
-
 - Top investment section
 
 # User Stories
@@ -479,6 +452,7 @@ Features:
 | [Git](https://git-scm.com/) | Version control system used to track code changes |
 | [GitHub](https://github.com/) | Platform for hosting the repository and project collaboration |
 | [VS Code](https://code.visualstudio.com/) | Development environment used to write and run the code |
+| [Deep-translator](https://pypi.org/project/deep-translator/) | Used to translate listing titles and locations into English for improved readability |
 
 
 
@@ -491,11 +465,8 @@ The Real Estate Analysis App is organized into modular functions responsible for
 ### handle_attempts(attempts, last_value)
 
 Handles behavior after multiple invalid input attempts.
-
 If the user reaches **3 incorrect attempts**, they are asked whether to continue or exit.
-
 If the user chooses **continue**, the last entered value is returned.
-
 If the user chooses **exit**, the program terminates.
 
 This function helps prevent infinite loops during input validation.
@@ -509,11 +480,8 @@ Prompts the user to enter a valid country.
 Validation rules:
 
 Only letters are allowed.
-
 Maximum length is **10 characters**.
-
 Only **"kazakhstan"** is currently supported.
-
 The user has **up to three attempts** before being asked whether to continue or exit.
 
 ---
@@ -525,11 +493,8 @@ Prompts the user to enter a valid city.
 Validation rules:
 
 Only letters are allowed.
-
 Maximum length is **10 characters**.
-
 Only **"almaty"** is currently supported.
-
 Allows **three attempts** before triggering the attempt handler.
 
 ---
@@ -541,9 +506,7 @@ Prompts the user to enter the number of rooms.
 Validation rules:
 
 Only numeric values are accepted.
-
 Valid range: **1–10 rooms**
-
 Empty input is not allowed.
 
 The user has **three attempts** before the program offers the option to continue or exit.
@@ -557,13 +520,11 @@ Prompts the user to select a preferred location.
 Accepted values:
 
 - center
-
 - outskirts
 
 Validation rules:
 
 Only letters allowed
-
 Maximum **10 characters**
 
 Used later to filter listings by central or non-central districts.
@@ -577,15 +538,12 @@ Prompts the user to enter a maximum budget.
 Rules:
 
 Only numeric values allowed
-
 Minimum price: **20,000,000 KZT**
-
 Maximum price: **500,000,000 KZT**
 
 If the user enters:
 
 a value **below the minimum**, the minimum is used
-
 a value **above the maximum**, the maximum is used
 
 This ensures the program always works with a valid budget range.
@@ -599,13 +557,9 @@ Collects all user search parameters.
 Prompts the user for:
 
 Country
-
 City
-
 Number of rooms
-
 Preferred location
-
 Budget
 
 Also prints the application title using **pyfiglet** to display:
@@ -625,7 +579,6 @@ Translates text into English using **GoogleTranslator**.
 Used to translate:
 
 - Apartment titles
-
 - Locations
 
 This improves readability of results when printing listings in the terminal.
@@ -639,9 +592,7 @@ Safely converts price input into an integer.
 If the value is:
 
 - non-numeric
-
 - negative
-
 - zero
 
 the function defaults to:
@@ -687,21 +638,13 @@ Scrapes apartment listings from **krisha.kz** using **Playwright**.
 Process:
 
 - Launches a headless Chromium browser
-
 - Iterates through pages up to MAX_PAGES
-
 - Waits for listing cards to load
-
 - Extracts the following fields:
-
 - Header
-
 - Price
-
 - Location
-
 - Link
-
 - Combined listing text
 
 Returns a list of raw listing data.
@@ -717,9 +660,7 @@ Steps include:
 #### Data Preparation
 
 - Converts raw data into a **DataFrame**
-
 - Removes duplicate listings
-
 - Extracts the number of rooms using **regex**
 
 #### Filtering
@@ -727,19 +668,14 @@ Steps include:
 Filters by:
 
 - number of rooms
-
 - location preference
-
 - maximum budget
 
 #### Data Cleaning
 
 - Cleans price text
-
 - Converts prices to numeric format
-
 - Extracts apartment size (sqm)
-
 - Removes invalid or missing values
 
 #### Feature Engineering
@@ -747,13 +683,9 @@ Filters by:
 Calculates:
 
 - price_per_m2
-
 - z_score
-
 - undervaluation_score
-
 - liquidity_score
-
 - center_score
 
 #### Outlier Removal
@@ -784,31 +716,20 @@ Exports processed data to **Google Sheets**.
 Steps:
 
 1. Clears the worksheet
-
 2. Writes the header row
-
 3. Uploads analyzed listing data
 
 Stored columns include:
 
 - header
-
 - price
-
 - location
-
 - link
-
 - sqm
-
 - price_per_m2
-
 - z_score
-
 - liquidity_score
-
 - center_score
-
 - investment_score
 
 ---
@@ -820,7 +741,6 @@ Formats and displays results.
 #### Google Sheets formatting
 
 Header row is **bold**
-
 Header row is **frozen**
 
 Top **3 investment listings highlighted in green**
@@ -832,9 +752,7 @@ Displays:
 **Market summary**
 
 - Average price
-
 - Average apartment size
-
 - Average price per m²
 
 **Top investment opportunities**
@@ -842,15 +760,10 @@ Displays:
 For each listing:
 
 - Apartment title
-
 - Location
-
 - Price
-
 - Size
-
 - Price per m²
-
 - Link
 
 Also confirms that results were saved to Google Sheets.
@@ -864,19 +777,12 @@ Controls the full application workflow.
 Steps executed:
 
 1. Installs Playwright browser dependencies
-
 2. Collects user input
-
 3. Parses price input
-
 4. Connects to Google Sheets
-
 5. Scrapes apartment listings
-
 6. Cleans and analyzes data
-
 7. Saves results to Google Sheets
-
 8. Displays investment insights
 
 Acts as the **central controller of the application**.
@@ -902,7 +808,7 @@ After execution, the user can choose to:
 
 ## Imports
 
-The following libraries are used in the project.
+The following libraries are used in the project [links](#tools--technologies). 
 
 ### Core Dependencies
 
@@ -1094,11 +1000,13 @@ The initial validation revealed several errors, which are shown below.
 <img width="900" alt="PEP8 end" src="https://github.com/user-attachments/assets/5144b68a-9ffe-42a7-b8ed-b73af7b87145">
 
 
-The validation process identified the following errors, which were then corrected:
+The validation process identified the following errors, which were then corrected. More information about the bug fixes and validation is available at the link: [TESTING.md](https://github.com/akashebaev-ux/real_estate_analysis_app/blob/main/TESTING.md).
+
 
 ---
 
-<img width="900" alt="PEP8 clean" src="https://github.com/user-attachments/assets/3736527a-d7f8-4ce2-92e6-eda3b38007ca">
+<img width="900" alt="PEP8+" src="https://github.com/user-attachments/assets/4b5e0216-fba7-40e9-a4dd-a22b530bd275">
+
 
 
 ## Manual Testing Documentation
@@ -1145,9 +1053,12 @@ Example console output:
 | Scraper functionality | Attempted to load listing pages using Selenium | Selenium errors occurred in the cloud environment |
 | Data extraction | Tested scraping logic locally | Data extracted successfully |
 
+
+More information about the bug fixes and validation is available at the link: [TESTING.md](https://github.com/akashebaev-ux/real_estate_analysis_app/blob/main/TESTING.md).
+
 ### Note
 
-During deployment testing, Selenium produced persistent issues on Heroku related to Chrome driver initialization.  
+During deployment testing, **Selenium** produced persistent issues on **Heroku related** to Chrome driver initialization.  
 Despite multiple fixes (buildpack configuration, driver paths, and headless settings), the issue could not be fully resolved in the Heroku environment.
 
 To ensure stable scraping in production, the scraping implementation was migrated from **Selenium to Playwright**, which provides better compatibility with headless browsers in cloud deployments.
@@ -1254,9 +1165,7 @@ For security reasons, this file is not included in the repository.
 To run the project locally:
 
 - Create a **Google Cloud Project**.
-
 - Enable the **Google Sheets API**.
-
 - Create a **Service Account**.
 
 Download the credentials file and rename it to:
@@ -1536,7 +1445,6 @@ Place the file in the **root directory of the project**.
 Example project structure:
 
 real-estate-analysis-app
-│
 ├── main.py
 ├── requirements.txt
 ├── Procfile
@@ -1625,9 +1533,7 @@ The local version of the application allows developers to test features and expe
 The deployed version is hosted online and may include:
 
 - Production configuration settings
-
 - Environment variables
-
 - Performance optimizations
 
 While both versions should behave similarly, small differences may occur depending on the deployment environment or hosting platform.
@@ -1690,4 +1596,6 @@ AI assistance was used **as a learning support tool**, and all code written in t
 
 # Acknowledgements
 
-I would like to express my sincere gratitude to **Mrs. Julia Konovalova**, an excellent mentor and teacher. Her professionalism and dedication are truly world-class. Her guidance and pivotal remarks provided valuable direction and made a significant difference in improving the quality of my work.
+I would like to express my sincere gratitude to **Mrs. Julia Konovalova**, an excellent mentor and teacher. Her professionalism and dedication are truly world-class. Her guidance and pivotal remarks provided valuable direction and made a significant difference in improving the quality of my project.
+
+**Ms. Tindy Chan** — Facilitator at Code Institute helped me review the README file and provided valuable advice.
