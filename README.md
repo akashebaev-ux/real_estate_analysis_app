@@ -266,6 +266,23 @@ Ensures:
 - City supported
 - Budget numeric
 
+**If users enter incorrect data into all input fields, the default data will be applied after the third failed attempt.**
+
+
+
+<img width="600" src="https://github.com/user-attachments/assets/2ebde7c9-f043-48d8-bd1f-1737be20ad46">
+
+
+<img width="600" src="https://github.com/user-attachments/assets/bb6081c1-4d25-4887-8764-1a1a715a656a">
+
+
+<img width="600" src="https://github.com/user-attachments/assets/08f1af38-5ab4-4342-8ef8-17464e1afeb7">
+
+
+<img width="600" src="https://github.com/user-attachments/assets/185e24f2-a6f4-4e7e-b62d-07505a8091b7">
+
+
+
 **Web Scraper**
 
 Uses Playwright to scrape:
