@@ -419,8 +419,7 @@ def clean_data(all_data, rooms_input, location_input, max_price):
     )
     # It checks if DataFrame is empty after scraping.
     if df.empty:
-        print("No listings found.")
-        exit()
+        return df
     # The code belowe: extract the number of rooms from the flat header
     # and convert it to numeric format.
     df["rooms"] = df["header"].str.extract(
@@ -616,9 +615,7 @@ def clean_data(all_data, rooms_input, location_input, max_price):
     # the best investment
     #  opportunities appear at the top of the DataFrame.
     if df.empty:
-        print("No listings found.")
-        exit()
-    return df
+        return df
 
 
 def save_to_sheets(df, ws):
@@ -756,6 +753,14 @@ def main():
         location,
         max_price
     )
+    if df.empty:
+        print("No listings found.")
+        choice = input("Do you want to search again? (y/n): ").strip().lower()
+        if choice == "y":
+            return
+        else:
+            print("Goodbye!")
+            exit()
     save_to_sheets(df, ws)
     print_results(df, ws)
 
