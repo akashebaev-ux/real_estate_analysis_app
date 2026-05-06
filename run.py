@@ -618,6 +618,7 @@ def clean_data(all_data, rooms_input, location_input, max_price):
         return df
     return df
 
+
 def save_to_sheets(df, ws):
     """
     Write analyzed real estate data to today's worksheet.
