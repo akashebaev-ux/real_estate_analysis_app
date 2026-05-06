@@ -23,10 +23,10 @@ from pyfiglet import figlet_format
 
 # CONSTANTS
 CITY_SLUG = "almaty"
-MAX_PAGES = 10
+MAX_PAGES = 2
 MIN_DEFAULT = 20_000_000
 MAX_DEFAULT = 500_000_000
-# max_pages is set to 10 to limit the number of pages scraped.
+# max_pages is set to 2 to limit the number of pages scraped.
 CENTER_KEYWORDS = [
     "Самал",
     "Достык",
@@ -740,11 +740,7 @@ def main():
     7. Saves the results to Google Sheets.
     8. Prints a summary of the market and top investment options.
     """
-    subprocess.run(
-        ["playwright", "install", "chromium"],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL
-    )
+
     _, _, rooms, location, price_input = get_user_input()
     max_price = parse_price(price_input)
     ws = setup_google_sheets()
