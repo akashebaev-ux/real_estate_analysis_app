@@ -616,7 +616,7 @@ def clean_data(all_data, rooms_input, location_input, max_price):
     #  opportunities appear at the top of the DataFrame.
     if df.empty:
         return df
-
+    return df
 
 def save_to_sheets(df, ws):
     """
