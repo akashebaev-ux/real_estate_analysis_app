@@ -347,6 +347,8 @@ def scrape_data(rooms_input):
             args=[
                 "--no-sandbox",
                 "--disable-dev-shm-usage"
+                "--disable-gpu",
+                "--single-process"
             ]
         )
         page = browser.new_page()
