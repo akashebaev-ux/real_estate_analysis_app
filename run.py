@@ -233,7 +233,7 @@ def get_valid_price():
             if result is not None:
                 print(
                     f"Because you did not enter a valid number"
-                    f"after 3 attempts, "
+                    f" after 3 attempts, "
                     f"the default value ({MAX_DEFAULT} KZT) will be applied."
                 )
                 return result
