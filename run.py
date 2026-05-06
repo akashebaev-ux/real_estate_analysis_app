@@ -208,7 +208,7 @@ def get_valid_location():
                 "the default value ('center') will be applied."
             )
             return result
-        
+
 
 def get_valid_price():
     """
@@ -232,7 +232,8 @@ def get_valid_price():
             result = handle_attempts(attempts, MAX_DEFAULT)
             if result is not None:
                 print(
-                    f"Because you did not enter a valid number after 3 attempts, "
+                    f"Because you did not enter a valid number"
+                    f"after 3 attempts, "
                     f"the default value ({MAX_DEFAULT} KZT) will be applied."
                 )
                 return result
@@ -741,9 +742,9 @@ def main():
     8. Prints a summary of the market and top investment options.
     """
     subprocess.run(
-    ["playwright", "install", "chromium"],
-    stdout=subprocess.DEVNULL,
-    stderr=subprocess.DEVNULL
+        ["playwright", "install", "chromium"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL
     )
     _, _, rooms, location, price_input = get_user_input()
     max_price = parse_price(price_input)
