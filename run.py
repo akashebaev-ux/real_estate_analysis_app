@@ -346,9 +346,7 @@ def scrape_data(rooms_input):
             headless=True,
             args=[
                 "--no-sandbox",
-                "--disable-dev-shm-usage"
-                "--disable-gpu",
-                "--single-process"
+                "--disable-dev-shm-usage",
             ]
         )
         page = browser.new_page()
@@ -742,7 +740,11 @@ def main():
     7. Saves the results to Google Sheets.
     8. Prints a summary of the market and top investment options.
     """
-
+    subprocess.run(
+    ["playwright", "install", "chromium"],
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.DEVNULL
+    )
     _, _, rooms, location, price_input = get_user_input()
     max_price = parse_price(price_input)
     ws = setup_google_sheets()
