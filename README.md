@@ -1103,6 +1103,7 @@ This command installs the **Chromium browser** required for Playwright to run th
 
 ⚠️**Important note:** Installing Chromium during runtime may introduce a delay when the application starts. As a result, it can sometimes take **1–3 minutes** for the main ASCII-art text to appear while the browser installation and initialization process completes.
 
+**NOTE: It was discovered that this code overwhelms the Heroku app’s memory capacity, but there is no alternative way to resolve this issue.**
 ---
 
 # Deployment
