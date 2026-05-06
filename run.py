@@ -85,8 +85,12 @@ def get_valid_country():
             attempts += 1
         else:
             return country
-        result = handle_attempts(attempts, country)
+        result = handle_attempts(attempts, "Kazakhstan")
         if result is not None:
+            print(
+                "Because you did not enter a valid country after 3 attempts, "
+                "the default value ('Kazakhstan') will be applied."
+            )
             return result
 
 
@@ -116,8 +120,12 @@ def get_valid_city():
             attempts += 1
         else:
             return city
-        result = handle_attempts(attempts, city)
+        result = handle_attempts(attempts, "Almaty")
         if result is not None:
+            print(
+                "Because you did not enter a valid city after 3 attempts, "
+                "the default value ('Almaty') will be applied."
+            )
             return result
 
 
@@ -156,8 +164,12 @@ def get_valid_rooms():
                 attempts += 1
             else:
                 return rooms
-        result = handle_attempts(attempts, rooms)
+        result = handle_attempts(attempts, 1)
         if result is not None:
+            print(
+                "Because you did not enter a valid number after 3 attempts, "
+                "the default value (1 room) will be applied."
+            )
             return result
 
 
@@ -165,28 +177,38 @@ def get_valid_location():
     """
     This function prompts the user to enter a preferred location
     (center or outskirts) and validates the input.
-    It ensures that only "center" or "outskirts" are accepted, the
-    length does not exceed 10 characters, and the user has up to 3 attempts
-    to enter valid input. After 3 incorrect attempts, the user can choose
-    to continue with the last input or exit the program.
+
+    The user has up to 3 attempts. After 3 failed attempts,
+    they can choose to continue or exit the program.
     """
     attempts = 0
+
     print("Preferred location (center / outskirts):\n"
           "(only one word - center or outskirts allowed)")
+
     while True:
         location = input("> ").strip().lower()
+
         if not location.isalpha():
             print("Only letters allowed. No numbers or symbols.")
+            attempts += 1
         elif len(location) > 10:
             print("Error: Maximum length is 10 characters.")
+            attempts += 1
         elif location not in ["center", "outskirts"]:
             print("Error: Only 'center' or 'outskirts' are allowed.")
+            attempts += 1
         else:
             return location
-        result = handle_attempts(attempts, location)
-        if result is not None:
-            return result
 
+        result = handle_attempts(attempts, "center")
+        if result is not None:
+            print(
+                "Because you did not enter a valid location after 3 attempts, "
+                "the default value ('center') will be applied."
+            )
+            return result
+        
 
 def get_valid_price():
     """
@@ -207,8 +229,12 @@ def get_valid_price():
         if not price.isdigit():
             print("Only numbers are allowed.")
             attempts += 1
-            result = handle_attempts(attempts, None)
+            result = handle_attempts(attempts, MAX_DEFAULT)
             if result is not None:
+                print(
+                    f"Because you did not enter a valid number after 3 attempts, "
+                    f"the default value ({MAX_DEFAULT} KZT) will be applied."
+                )
                 return result
             continue
         price = int(price)
@@ -410,10 +436,8 @@ def clean_data(all_data, rooms_input, location_input, max_price):
     )
     # errors="coerce" converts non-numeric values to NaN, which is useful
     # for filtering later.
-    if rooms_input:
-        df = df[
-            df["rooms"] == int(rooms_input)
-        ]
+    if rooms_input is not None:
+        df = df[df["rooms"] == int(rooms_input)]
     # The code below removes duplicate flat listings based on the link column.
     # Ensures each property appears only once in the dataset.
     df = df.drop_duplicates(subset=["link"])
