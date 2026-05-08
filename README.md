@@ -1081,6 +1081,10 @@ Despite multiple fixes (buildpack configuration, driver paths, and headless sett
 
 To ensure stable scraping in production, the scraping implementation was migrated from **Selenium to Playwright**, which provides better compatibility with headless browsers in cloud deployments.
 
+### README issue
+
+During the development process, several inconsistencies occurred due to the **README file** being edited directly on GitHub instead of through VS Code. As a result, GitHub automatically generated additional commits related to the README updates. This issue has been identified, and greater care will be taken in future development to maintain consistency across documentation and version control workflows.
+
 ### Timeout Adjustments
 
 Heroku dynos run slower than a local machine. To ensure page content loads completely before scraping begins, the scraping timeouts were increased.
