@@ -48,14 +48,20 @@ def handle_attempts(attempts, last_value):
      to allow the user to keep trying.
      """
     if attempts >= 3:
-        choice = input(
-            "Too many incorrect attempts. Continue anyway? (y/n): "
-        ).strip().lower()
-        if choice == "y":
-            return last_value
-        else:
-            print("Exiting program.")
-            exit()
+        while True:
+            choice = input(
+                "Too many incorrect attempts. "
+                "The default value will be applied "
+                "if you choose to continue. "
+                "Continue? (y/n): "
+            ).strip().lower()
+            if choice == "y":
+                return last_value
+            elif choice == "n":
+                print("Exiting program.")
+                exit()
+            else:
+                print("Invalid input. Please enter 'y' or 'n'.")
     return None
 
 
@@ -769,14 +775,14 @@ def main():
 if __name__ == "__main__":
     while True:
         main()
-        choice = input(
-            "\nDo you want to run the program again? (y/n): "
-            ).strip().lower()
-        if choice == "y":
-            continue
-        elif choice == "n":
-            print("Program finished. Goodbye!")
-            break
-        else:
-            print("Invalid input. Exiting program.")
-            break
+        while True:
+            choice = input(
+                "\nDo you want to run the program again? (y/n): "
+                ).strip().lower()
+            if choice == "y":
+                break
+            elif choice == "n":
+                print("Program finished. Goodbye!")
+                exit()
+            else:
+                print("Invalid input. Please type only 'y' or 'n'.")
