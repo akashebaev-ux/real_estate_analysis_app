@@ -778,12 +778,17 @@ def main():
     )
     if df.empty:
         print("No listings found.")
-        choice = input("Do you want to search again? (y/n): ").strip().lower()
-        if choice == "y":
-            return
-        else:
-            print("Goodbye!")
-            exit()
+        while True:
+            choice = input(
+                "Do you want to search again? (y/n): "
+            ).strip().lower()
+            if choice == "y":
+                return
+            elif choice == "n":
+                print("Goodbye!")
+                exit()
+            else:
+                print("Invalid input. Please type only 'y' or 'n'.")
     save_to_sheets(df, ws)
     print_results(df, ws)
 
