@@ -50,7 +50,7 @@ def handle_attempts(attempts, last_value):
     if attempts >= 3:
         while True:
             choice = input(
-                "Too many incorrect attempts. "
+                "\nToo many incorrect attempts. "
                 "The default value will be applied "
                 "if you choose to continue. "
                 "Continue? (y/n): "
@@ -76,27 +76,33 @@ def get_valid_country():
     choose to continue or exit the program.
     """
     attempts = 0
-    print("Enter the country (only Kazakhstan is available):")
+    print(
+        "Enter the country (only Kazakhstan is available):\n"
+        "Note: After 3 incorrect attempts, "
+        "the default value ('Kazakhstan') will be applied.\n"
+    )
     while True:
         country = input("> ").strip().lower()
         if not country.isalpha():
-            print("Only letters allowed. No numbers or symbols.")
+            print(
+                "Please type: kazakhstan\n"
+                "NOTE: Only letters allowed. "
+                "No numbers, symbols, or empty input allowed."
+            )
             attempts += 1
         elif len(country) > 10:
             print("Maximum 10 letters allowed.")
             attempts += 1
         elif country != "kazakhstan":
-            print("Currently only Kazakhstan supported.")
-            print("Please type: kazakhstan")
+            print(
+                "Please type: kazakhstan\n"
+                "NOTE: No numbers, symbols, or empty input allowed."
+            )
             attempts += 1
         else:
             return country
         result = handle_attempts(attempts, "Kazakhstan")
         if result is not None:
-            print(
-                "Because you did not enter a valid country after 3 attempts, "
-                "the default value ('Kazakhstan') will be applied."
-            )
             return result
 
 
@@ -111,27 +117,34 @@ def get_valid_city():
     continue or exit the program.
     """
     attempts = 0
-    print("Enter the city (only Almaty is available):")
+    print(
+        "\nEnter the city (only Almaty is available):\n"
+        "Note: After 3 incorrect attempts, "
+        "the default value ('Almaty') will be applied.\n"
+    )
     while True:
         city = input("> ").strip().lower()
         if not city.isalpha():
-            print("Only letters allowed. No numbers or symbols.")
+            print(
+                "Please type: Almaty\n"
+                "NOTE: Only letters allowed. "
+                "No numbers, symbols, or empty input allowed."
+            )
             attempts += 1
         elif len(city) > 10:
             print("Maximum 10 letters allowed.")
             attempts += 1
         elif city != "almaty":
-            print("Currently only Almaty supported.")
-            print("Please type: almaty")
+            print(
+                "Currently only Almaty supported.\n"
+                "Please type: almaty\n"
+                "NOTE: No numbers, symbols, or empty input allowed."
+            )
             attempts += 1
         else:
             return city
         result = handle_attempts(attempts, "Almaty")
         if result is not None:
-            print(
-                "Because you did not enter a valid city after 3 attempts, "
-                "the default value ('Almaty') will be applied."
-            )
             return result
 
 
@@ -145,19 +158,27 @@ def get_valid_rooms():
     the last input or exit the program.
     """
     attempts = 0
-    print("Number of rooms desired (1-10):")
+    print(
+        "\nEnter the number of rooms desired (1-10):\n"
+        "Note: After 3 incorrect attempts, "
+        "the default value (1 room) will be applied.\n"
+    )
     while True:
         rooms = input("> ").strip()
         if rooms == "":
             print(
-                "Input cannot be empty. "
+                "Only numbers are allowed \n"
                 "Please enter a number between 1 and 10."
+                "(positive whole numbers only). \n"
+                "No letters, symbols, or empty input allowed."
             )
             attempts += 1
         elif not rooms.isdigit():
             print(
-                "Only numbers are allowed. "
+                "Only numbers are allowed \n"
                 "Please enter a number between 1 and 10."
+                "(positive whole numbers only). \n"
+                "No letters, symbols, or empty input allowed."
             )
             attempts += 1
         else:
@@ -172,10 +193,6 @@ def get_valid_rooms():
                 return rooms
         result = handle_attempts(attempts, 1)
         if result is not None:
-            print(
-                "Because you did not enter a valid number after 3 attempts, "
-                "the default value (1 room) will be applied."
-            )
             return result
 
 
@@ -189,14 +206,21 @@ def get_valid_location():
     """
     attempts = 0
 
-    print("Preferred location (center / outskirts):\n"
-          "(only one word - center or outskirts allowed)")
+    print(
+        "\nPreferred location (center / outskirts):\n"
+        "(only one word - center or outskirts allowed)\n"
+        "Note: After 3 incorrect attempts, "
+        "the default value ('center') will be applied.\n"
+    )
 
     while True:
         location = input("> ").strip().lower()
 
         if not location.isalpha():
-            print("Only letters allowed. No numbers or symbols.")
+            print(
+                "Only letters allowed. "
+                "No numbers, symbols, or empty input allowed."
+            )
             attempts += 1
         elif len(location) > 10:
             print("Error: Maximum length is 10 characters.")
@@ -209,10 +233,6 @@ def get_valid_location():
 
         result = handle_attempts(attempts, "center")
         if result is not None:
-            print(
-                "Because you did not enter a valid location after 3 attempts, "
-                "the default value ('center') will be applied."
-            )
             return result
 
 
@@ -226,36 +246,32 @@ def get_valid_price():
     or exit the program.
     """
     attempts = 0
+    print(
+        "\nEnter your budget (20-500 million KZT)"
+        f"(e.g., 50000000 for 50 million).\n"
+        f"NOTE: Values below {MIN_DEFAULT:,} KZT use the minimum. "
+        f"Values above {MAX_DEFAULT:,} KZT use the maximum. \n"
+        f"After 3 incorrect attempts, {MAX_DEFAULT:,} KZT will be applied.\n"
+    )
     while True:
         price = input(
-            "Enter your budget (between 20 million and 500 million KZT).\n"
-            f"Note: Any value below {MIN_DEFAULT} KZT "
-            f"will be set to the default minimum of {MIN_DEFAULT} KZT.\n"
+            "> "
         ).strip()
         if not price.isdigit():
-            print("Only numbers are allowed.")
+            print(
+                "Only numbers are allowed "
+                "(positive whole numbers only). \n"
+                "No letters, symbols, or empty input allowed."
+            )
             attempts += 1
             result = handle_attempts(attempts, MAX_DEFAULT)
             if result is not None:
-                print(
-                    f"Because you did not enter a valid number"
-                    f" after 3 attempts, "
-                    f"the default value ({MAX_DEFAULT} KZT) will be applied."
-                )
                 return result
             continue
         price = int(price)
         if price < MIN_DEFAULT:
-            print(
-                f"Entered value is below the minimum.\n"
-                f"The default minimum of {MIN_DEFAULT} KZT will be used."
-            )
             return MIN_DEFAULT
         if price > MAX_DEFAULT:
-            print(
-                f"Entered value is above the maximum.\n"
-                f"The default maximum of {MAX_DEFAULT} KZT will be used."
-            )
             return MAX_DEFAULT
         return price
 
@@ -368,7 +384,7 @@ def scrape_data(rooms_input):
                     f"https://krisha.kz/prodazha/kvartiry/{CITY_SLUG}/"
                     f"?page={page_num}"
                 )
-            print("Currently parsing page", page_num)
+            print(f"Searching apartments on page {page_num}")
             try:
                 page.goto(url, wait_until="domcontentloaded", timeout=60000)
             except Exception:
