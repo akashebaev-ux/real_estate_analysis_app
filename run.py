@@ -250,7 +250,8 @@ def get_valid_price():
         f"(e.g., 50000000 for 50 million)\n"
         f"NOTE: Values below {MIN_DEFAULT:,} KZT use the minimum. "
         f"Values above {MAX_DEFAULT:,} KZT use the maximum. \n"
-        f"After 3 incorrect attempts, {MAX_DEFAULT:,} KZT will be applied.\n"
+        f"After 3 incorrect attempts, {MAX_DEFAULT:,} KZT will be applied "
+        f"by default.\n"
     )
     while True:
         price = input(
