@@ -136,7 +136,6 @@ def get_valid_city():
             attempts += 1
         elif city != "almaty":
             print(
-                "Currently only Almaty supported.\n"
                 "Please type: almaty\n"
                 "NOTE: No numbers, symbols, or empty input allowed."
             )
@@ -247,8 +246,8 @@ def get_valid_price():
     """
     attempts = 0
     print(
-        "\nEnter your budget (20-500 million KZT)"
-        f"(e.g., 50000000 for 50 million).\n"
+        "\nEnter your budget (min. 20 mln - max. 500 mln KZT):\n"
+        f"(e.g., 50000000 for 50 million)\n"
         f"NOTE: Values below {MIN_DEFAULT:,} KZT use the minimum. "
         f"Values above {MAX_DEFAULT:,} KZT use the maximum. \n"
         f"After 3 incorrect attempts, {MAX_DEFAULT:,} KZT will be applied.\n"
