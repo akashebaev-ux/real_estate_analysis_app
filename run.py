@@ -794,15 +794,21 @@ def main():
 
 if __name__ == "__main__":
     while True:
-        main()
+        try:
+            main()
+        except KeyboardInterrupt:
+            print("\nProgram interrupted by user.")
         while True:
-            choice = input(
-                "\nDo you want to run the program again? (y/n): "
-                ).strip().lower()
-            if choice == "y":
-                break
-            elif choice == "n":
-                print("Program finished. Goodbye!")
-                exit()
-            else:
-                print("Invalid input. Please type only 'y' or 'n'.")
+            try:
+                choice = input(
+                    "\nDo you want to run the program again? (y/n): "
+                    ).strip().lower()
+                if choice == "y":
+                    break
+                elif choice == "n":
+                    print("Program finished. Goodbye!")
+                    exit()
+                else:
+                    print("Invalid input. Please type only 'y' or 'n'.")
+            except KeyboardInterrupt:
+                print("\nPlease choose 'y' to restart or 'n' to exit.")
