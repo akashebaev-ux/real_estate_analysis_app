@@ -240,23 +240,24 @@ Input Content:
 
 - Country
 
-<img width="600" src="https://github.com/user-attachments/assets/b45ca05a-cf98-4c9c-87a4-db1073e2704f">
+<img width="600"  src="https://github.com/user-attachments/assets/bd965773-475d-48fe-b227-79b0506bd38d">
 
 - City
 
-<img width="600" src="https://github.com/user-attachments/assets/18435666-cc5a-4554-aee3-b6359a9f2fcb">
+<img width="600" src="https://github.com/user-attachments/assets/d60a2c02-4018-4e93-96c6-e43ba7f5e410">
 
 - Number of rooms (1-10)
 
-<img width="600" src="https://github.com/user-attachments/assets/02aa55d4-d6aa-499a-b8ce-96e4ac69158b">
+<img width="600" src="https://github.com/user-attachments/assets/cc3b3c9d-26b0-4d9e-a6fa-1e873c46a60f">
   
 - Preferred location (center or outskirts)
 
-<img width="600" src="https://github.com/user-attachments/assets/fd5e6ba5-4871-42c6-a006-4b85b60765ff">
+<img width="600" src="https://github.com/user-attachments/assets/ee78df86-ec7f-41bd-8e43-99f768807a84">
 
 - Budget
 
-<img width="600" src="https://github.com/user-attachments/assets/d9180077-e7fc-41ab-a1ce-bef50d2573c1">
+<img width="600" src="https://github.com/user-attachments/assets/156d1248-a9d4-4215-aab7-da895a8c6247">
+
 
 **Input Validation**
 
@@ -270,13 +271,9 @@ Ensures:
 
 
 
-<img width="600" src="https://github.com/user-attachments/assets/2ebde7c9-f043-48d8-bd1f-1737be20ad46">
+<img width="600" src="https://github.com/user-attachments/assets/62366ea6-cda3-424a-9363-5c3d9ac99bbf">
 
-
-<img width="600" src="https://github.com/user-attachments/assets/bb6081c1-4d25-4887-8764-1a1a715a656a">
-
-
-<img width="600" src="https://github.com/user-attachments/assets/08f1af38-5ab4-4342-8ef8-17464e1afeb7">
+**NOTE:** Only letters/numbers allowed. No symbols or empty input allowed. 
 
 
 <img width="600" src="https://github.com/user-attachments/assets/185e24f2-a6f4-4e7e-b62d-07505a8091b7">
@@ -1084,6 +1081,18 @@ To ensure stable scraping in production, the scraping implementation was migrate
 ### README issue
 
 During the development process, several inconsistencies occurred due to the **README file** being edited directly on GitHub instead of through VS Code. As a result, GitHub automatically generated additional commits related to the README updates. This issue has been identified, and greater care will be taken in future development to maintain consistency across documentation and version control workflows.
+
+### KeyboardInterrupt Handling Fix
+
+A `KeyboardInterrupt` handling mechanism was added to improve the stability and user experience of the application when using the `Ctrl + C` keyboard combination.
+
+Previously, pressing `Ctrl + C` caused the program to terminate abruptly and display a Python traceback error. The application now catches the interruption safely and redirects the user to a restart/exit prompt instead of crashing.
+
+Additional improvements:
+- Prevented crashes caused by multiple `Ctrl + C` presses.
+- Added safer restart loop handling.
+- Improved console interaction flow for unexpected interruptions.
+- Ensured the application exits cleanly when the user chooses to stop the program.
 
 ### Timeout Adjustments
 
