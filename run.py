@@ -206,7 +206,7 @@ def get_valid_location():
     attempts = 0
 
     print(
-        "\nPreferred location (center / outskirts):\n"
+        "\nEnter the preferred location (center / outskirts):\n"
         "(only one word - center or outskirts allowed)\n"
         "Note: After 3 incorrect attempts, "
         "the default value ('center') will be applied.\n"
